@@ -3,8 +3,11 @@ package com.example.contactosysensores;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -57,6 +60,31 @@ public class AppActivity extends AppCompatActivity {
                 loadMagnetometerFragment();
             }
         });
+
+        ImageView imageView = findViewById(R.id.imageView);
+        imageView.setOnClickListener(v -> showSensorDescriptionDialog());
+    }
+
+    private void showSensorDescriptionDialog() {
+        Fragment activeFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        String message;
+        String titulo;
+
+        if (activeFragment instanceof AcelerometroFragment) {
+            titulo ="Detalles - Acelerómetro";
+            message = "Haga CLICK en Añadir para agregar contactos a su lista. Esta aplicación está utilizando el ACELEROMETRO de su dispositivo. De esta forma, la lista hará scroll hacia abajo, cuando agite su dispositivo.";
+        } else if (activeFragment instanceof MagnetometroFragment) {
+            titulo ="Detalles - MAGNETÓMETRO";
+            message = "Haga CLICK on Añadir para agregar contactos a su lista. Esta aplicación está utilizando el MAGNETÓMETRO de su dispositivo. De esta forma, la lista se mostrara al 100% cuando se apurte al NORTE. Caso contrario se desvanecerá";
+        } else {
+            return;
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle(titulo)
+                .setMessage(message)
+                .setPositiveButton("Aceptar", null)
+                .show();
     }
 
     private void loadMagnetometerFragment() {
