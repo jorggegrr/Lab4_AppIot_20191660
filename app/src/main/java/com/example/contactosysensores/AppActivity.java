@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class AppActivity extends AppCompatActivity {
     private Button btnSensor;
     private FragmentManager fragmentManager;
     private Button btnAnadir;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class AppActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         btnAnadir = findViewById(R.id.btnAnadir);
         btnAnadir.setOnClickListener(v -> addRandomContactToActiveFragment());
+        progressBar = findViewById(R.id.progressBar);
 
 
         loadMagnetometerFragment();
@@ -63,6 +66,7 @@ public class AppActivity extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.imageView);
         imageView.setOnClickListener(v -> showSensorDescriptionDialog());
+
     }
 
     private void showSensorDescriptionDialog() {
@@ -127,10 +131,11 @@ public class AppActivity extends AppCompatActivity {
 
     private void fetchRandomContact() {
         runOnUiThread(() -> {
+            progressBar.setVisibility(View.VISIBLE);
             btnAnadir.setEnabled(false);
             btnSensor.setEnabled(false);
-            btnAnadir.setAlpha(0.5f); // 50% de opacidad
-            btnSensor.setAlpha(0.5f); // 50% de opacidad
+            btnAnadir.setAlpha(0.5f);
+            btnSensor.setAlpha(0.5f);
         });
         new Thread(() -> {
             try {
@@ -187,11 +192,12 @@ public class AppActivity extends AppCompatActivity {
                         btnAnadir.setEnabled(true);
                         btnSensor.setEnabled(true);
                         btnAnadir.setAlpha(1f); // 100% de opacidad
-                        btnSensor.setAlpha(1f); // 100% de opacidad
+                        btnSensor.setAlpha(1f);
+                        progressBar.setVisibility(View.GONE);
                     });
                 } else {
                     runOnUiThread(() -> {
-                        Toast.makeText(AppActivity.this, "Error al agregar contacto", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppActivity.this, "Ocurrió un error al agregar contacto", Toast.LENGTH_SHORT).show();
                     });
                 }
             } catch (Exception e) {
@@ -200,8 +206,9 @@ public class AppActivity extends AppCompatActivity {
                     Toast.makeText(AppActivity.this, "Ocurrió un error", Toast.LENGTH_SHORT).show();
                     btnAnadir.setEnabled(true);
                     btnSensor.setEnabled(true);
-                    btnAnadir.setAlpha(1f); // 100% de opacidad
-                    btnSensor.setAlpha(1f); // 100% de opacidad
+                    btnAnadir.setAlpha(1f);
+                    btnSensor.setAlpha(1f);
+                    progressBar.setVisibility(View.GONE);
                 });
             }
         }).start();

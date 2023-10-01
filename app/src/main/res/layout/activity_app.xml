@@ -30,7 +30,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTipoDeSensor"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.25" >
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="348dp"
+            android:layout_height="277dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/btnLayout"
