@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    tools:context=".AppActivity">
+
+    <TextView
+        android:id="@+id/textViewTipoDeSensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Tipo de Sensor"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="409dp"
+        android:layout_height="560dp"
+        android:layout_above="@+id/btnLayout"
+        android:layout_below="@id/textViewTipoDeSensor"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTipoDeSensor"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <LinearLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="48"
+            android:src="@drawable/baseline_remove_red_eye_24" />
+
+        <Button
+            android:id="@+id/btnSensor"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewTipoDeSensor"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#F0FD00"
+            android:text="Ir a Acelerómetro" />
+
+        <Button
+            android:id="@+id/btnAnadir"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewTipoDeSensor"
+            android:layout_marginEnd="32dp"
+            android:layout_toEndOf="@+id/btnSensor"
+            android:backgroundTint="#F33123"
+            android:text="Añadir"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/btnIrAcelerometro"
+            app:layout_constraintHorizontal_bias="0.657"
+            app:layout_constraintStart_toEndOf="@+id/btnIrAcelerometro" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
